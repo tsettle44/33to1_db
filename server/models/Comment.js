@@ -7,6 +7,11 @@ const commentSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  email: {
+    type: String,
+    required: true,
+    trim: true
+  },
   createdAt: {
     type: String,
     default: moment().format("MM/DD/YY, h:mm a")

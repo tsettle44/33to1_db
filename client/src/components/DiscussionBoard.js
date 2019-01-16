@@ -26,7 +26,8 @@ export class DiscussionBoard extends Component {
     backdrop: "static",
     ids: [],
     name: "",
-    body: ""
+    body: "",
+    email: ""
   };
 
   componentDidMount() {
@@ -49,6 +50,7 @@ export class DiscussionBoard extends Component {
     axios
       .post("http://localhost:5000/api/posts", {
         name: this.state.name,
+        email: this.state.email,
         body: this.state.body
       })
       .then(function(response) {
@@ -67,6 +69,7 @@ export class DiscussionBoard extends Component {
           "http://localhost:5000/api/posts/" + id.p + "/" + id.c + "/comment",
           {
             name: this.state.name,
+            email: this.state.email,
             body: this.state.body
           }
         )
@@ -81,6 +84,7 @@ export class DiscussionBoard extends Component {
       axios
         .post("http://localhost:5000/api/posts/" + id.p + "/comment", {
           name: this.state.name,
+          email: this.state.email,
           body: this.state.body
         })
         .then(function(response) {
@@ -177,6 +181,13 @@ export class DiscussionBoard extends Component {
               type="text"
               name="name"
               id="name"
+            />
+            <Label for="email">Email</Label>
+            <Input
+              onChange={this.handleChange}
+              type="email"
+              name="email"
+              id="email"
             />
             <Label for="body">Post</Label>
             <Input
@@ -288,19 +299,26 @@ export class DiscussionBoard extends Component {
               <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
               <ModalBody>
                 <FormGroup>
-                  <Label for="name">Name</Label>
+                  <Label for="nameM">Name</Label>
                   <Input
                     onChange={this.handleChange}
                     type="text"
                     name="name"
-                    id="name"
+                    id="nameM"
                   />
-                  <Label for="body">Reply</Label>
+                  <Label for="emailM">Email</Label>
+                  <Input
+                    onChange={this.handleChange}
+                    type="email"
+                    name="email"
+                    id="emailM"
+                  />
+                  <Label for="bodyM">Reply</Label>
                   <Input
                     onChange={this.handleChange}
                     type="textarea"
                     name="body"
-                    id="body"
+                    id="bodyM"
                   />
                 </FormGroup>
               </ModalBody>
@@ -329,6 +347,7 @@ const containerStyle = {
 
 const postStyle = {
   padding: "20px",
+  paddingRight: "10px",
   marginTop: "20px",
   border: "2px #ededed solid",
   borderRadius: "5px"

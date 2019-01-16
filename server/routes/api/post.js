@@ -33,6 +33,7 @@ router.post("/", (req, res) => {
   if (req.body.name && req.body.body) {
     const postData = {
       name: req.body.name,
+      email: req.body.email,
       body: req.body.body
     };
 
@@ -84,6 +85,7 @@ router.post("/:pID/comment", (req, res) => {
   if (req.body.name && req.body.body) {
     const commentData = {
       name: req.body.name,
+      email: req.body.email,
       body: req.body.body
     };
 
@@ -134,6 +136,7 @@ router.post("/:pID/:cID/comment", (req, res) => {
   if (req.body.name && req.body.body) {
     const commentData = {
       name: req.body.name,
+      email: req.body.email,
       body: req.body.body
     };
 
