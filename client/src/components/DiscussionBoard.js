@@ -105,7 +105,13 @@ export class DiscussionBoard extends Component {
         .catch(function(error) {
           console.log(error);
         });
-      window.location.reload();
+
+      const post = this.state.posts.filter(post => post._id === p);
+      const comment = post[0].comments.filter(comment => comment._id === c);
+      const comCom = comment[0].comments.filter(comCom => comCom._id === cc);
+
+      comCom[0].likes++;
+      this.setState({ posts: [...this.state.posts] });
     } else if (p && c) {
       axios
         .post("http://localhost:5000/api/posts/" + p + "/" + c + "/like")
@@ -115,7 +121,11 @@ export class DiscussionBoard extends Component {
         .catch(function(error) {
           console.log(error);
         });
-      window.location.reload();
+      const post = this.state.posts.filter(post => post._id === p);
+      const comment = post[0].comments.filter(comment => comment._id === c);
+
+      comment[0].likes++;
+      this.setState({ posts: [...this.state.posts] });
     } else {
       axios
         .post("http://localhost:5000/api/posts/" + p + "/like")
@@ -125,7 +135,11 @@ export class DiscussionBoard extends Component {
         .catch(function(error) {
           console.log(error);
         });
-      window.location.reload();
+
+      const post = this.state.posts.filter(post => post._id === p);
+
+      post[0].likes++;
+      this.setState({ posts: [...this.state.posts] });
     }
   };
 
