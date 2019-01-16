@@ -147,6 +147,17 @@ export class DiscussionBoard extends Component {
     }
   };
 
+  disabled = i => {
+    console.log(i.toString().length);
+    if (i.length === 4) {
+      document.getElementById(i).disabled = true;
+    } else if (i.length === 3) {
+      document.getElementById(i).disabled = true;
+    } else {
+      document.getElementById(i).disabled = true;
+    }
+  };
+
   flag = (p, c, cc) => {
     console.log(p, c, cc, "has been flagged");
   };
@@ -211,10 +222,12 @@ export class DiscussionBoard extends Component {
             <p style={pDateStyle}>at {post.createdAt}</p>
             <p style={pLikesStyle}>{post.likes}</p>
             <Button
+              id={i}
               color="link"
               style={iconHeart}
               onClick={() => {
                 this.like(post._id);
+                this.disabled(i);
               }}
             >
               <FontAwesomeIcon icon={faHeart} />
@@ -236,10 +249,12 @@ export class DiscussionBoard extends Component {
                 <p style={pDateStyle}> at {comment.createdAt}</p>
                 <p style={pLikesStyle}>{comment.likes}</p>
                 <Button
+                  id={c.toString() + "-c"}
                   color="link"
                   style={iconHeart}
                   onClick={() => {
                     this.like(post._id, comment._id);
+                    this.disabled(c + "-c");
                   }}
                 >
                   <FontAwesomeIcon icon={faHeart} />
@@ -264,10 +279,12 @@ export class DiscussionBoard extends Component {
                     <p style={pDateStyle}> at {cc.createdAt}</p>
                     <p style={pLikesStyle}>{cc.likes}</p>
                     <Button
+                      id={cID.toString() + "-cc"}
                       color="link"
                       style={iconHeart}
                       onClick={() => {
                         this.like(post._id, comment._id, cc._id);
+                        this.disabled(cID + "-cc");
                       }}
                     >
                       <FontAwesomeIcon icon={faHeart} />
