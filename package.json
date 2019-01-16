@@ -1,0 +1,31 @@
+{
+  "name": "33to1_api",
+  "version": "1.0.0",
+  "description": "API for 33to1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsettle44/Forum_Fullstack.git"
+  },
+  "author": "Tom Settle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsettle44/Forum_Fullstack/issues"
+  },
+  "homepage": "https://github.com/tsettle44/Forum_Fullstack#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "moment": "^2.23.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
