@@ -15,6 +15,7 @@ import {
   faCommentAlt,
   faFlag
 } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 export class Posts extends Component {
   render() {
@@ -25,7 +26,9 @@ export class Posts extends Component {
         {posts.map((post, i) => (
           <div style={postStyle} key={i}>
             <p style={pNameStyle}>{post.name} </p>
-            <p style={pDateStyle}>at {post.createdAt}</p>
+            <p style={pDateStyle}>
+              at {moment(post.createdAt).format("MM/DD/YY, h:mm a")}
+            </p>
             <p style={pLikesStyle}>{post.likes}</p>
             <Button
               id={i}
@@ -52,7 +55,10 @@ export class Posts extends Component {
             {post.comments.map((comment, c) => (
               <div style={commentStyle} key={c}>
                 <p style={pNameStyle}>{comment.name} </p>
-                <p style={pDateStyle}> at {comment.createdAt}</p>
+                <p style={pDateStyle}>
+                  {" "}
+                  at {moment(comment.createdAt).format("MM/DD/YY, h:mm a")}
+                </p>
                 <p style={pLikesStyle}>{comment.likes}</p>
                 <Button
                   id={c.toString() + "-c"}
@@ -82,7 +88,10 @@ export class Posts extends Component {
                 {comment.comments.map((cc, cID) => (
                   <div style={ccDivStyle} key={cID}>
                     <p style={pNameStyle}>{cc.name} </p>
-                    <p style={pDateStyle}> at {cc.createdAt}</p>
+                    <p style={pDateStyle}>
+                      {" "}
+                      at {moment(cc.createdAt).format("MM/DD/YY, h:mm a")}
+                    </p>
                     <p style={pLikesStyle}>{cc.likes}</p>
                     <Button
                       id={cID.toString() + "-cc"}
