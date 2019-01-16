@@ -2,22 +2,13 @@ import React, { Component } from "react";
 import {
   Container,
   Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Input,
   Label,
   FormGroup,
   Jumbotron
 } from "reactstrap";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faCommentAlt,
-  faFlag
-} from "@fortawesome/free-solid-svg-icons";
+import Posts from "./items/Posts";
 
 export class DiscussionBoard extends Component {
   state = {
@@ -37,7 +28,6 @@ export class DiscussionBoard extends Component {
   }
 
   toggle = (p, c) => {
-    console.log(p, c);
     this.setState({
       modal: !this.state.modal,
       ids: { p, c }
@@ -148,7 +138,6 @@ export class DiscussionBoard extends Component {
   };
 
   disabled = i => {
-    console.log(i.toString().length);
     if (i.length === 4) {
       document.getElementById(i).disabled = true;
     } else if (i.length === 3) {
@@ -216,143 +205,16 @@ export class DiscussionBoard extends Component {
             </Button>
           </FormGroup>
         </Jumbotron>
-        {this.state.posts.map((post, i) => (
-          <div style={postStyle} key={i}>
-            <p style={pNameStyle}>{post.name} </p>
-            <p style={pDateStyle}>at {post.createdAt}</p>
-            <p style={pLikesStyle}>{post.likes}</p>
-            <Button
-              id={i}
-              color="link"
-              style={iconHeart}
-              onClick={() => {
-                this.like(post._id);
-                this.disabled(i);
-              }}
-            >
-              <FontAwesomeIcon icon={faHeart} />
-            </Button>
-            <p style={pBody}>{post.body}</p>
-            <Button
-              color="link"
-              style={replyBtn}
-              onClick={() => this.toggle(post._id)}
-            >
-              <FontAwesomeIcon icon={faCommentAlt} /> Reply
-            </Button>
-            <Button color="link" onClick={() => this.flag(post._id)}>
-              <FontAwesomeIcon icon={faFlag} /> Flag
-            </Button>
-            {post.comments.map((comment, c) => (
-              <div style={commentStyle} key={c}>
-                <p style={pNameStyle}>{comment.name} </p>
-                <p style={pDateStyle}> at {comment.createdAt}</p>
-                <p style={pLikesStyle}>{comment.likes}</p>
-                <Button
-                  id={c.toString() + "-c"}
-                  color="link"
-                  style={iconHeart}
-                  onClick={() => {
-                    this.like(post._id, comment._id);
-                    this.disabled(c + "-c");
-                  }}
-                >
-                  <FontAwesomeIcon icon={faHeart} />
-                </Button>
-                <p style={pBody}>{comment.body}</p>
-                <Button
-                  color="link"
-                  style={replyBtn}
-                  onClick={() => this.toggle(post._id, comment._id)}
-                >
-                  <FontAwesomeIcon icon={faCommentAlt} /> Reply
-                </Button>
-                <Button
-                  color="link"
-                  onClick={() => this.flag(post._id, comment._id)}
-                >
-                  <FontAwesomeIcon icon={faFlag} /> Flag
-                </Button>
-                {comment.comments.map((cc, cID) => (
-                  <div style={ccDivStyle} key={cID}>
-                    <p style={pNameStyle}>{cc.name} </p>
-                    <p style={pDateStyle}> at {cc.createdAt}</p>
-                    <p style={pLikesStyle}>{cc.likes}</p>
-                    <Button
-                      id={cID.toString() + "-cc"}
-                      color="link"
-                      style={iconHeart}
-                      onClick={() => {
-                        this.like(post._id, comment._id, cc._id);
-                        this.disabled(cID + "-cc");
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faHeart} />
-                    </Button>
-                    <p style={pBody}>{cc.body}</p>
-                    <Button
-                      color="link"
-                      style={replyBtn}
-                      onClick={() => this.toggle(post._id, comment._id)}
-                    >
-                      <FontAwesomeIcon icon={faCommentAlt} /> Reply
-                    </Button>
-                    <Button
-                      color="link"
-                      onClick={() => this.flag(post._id, comment._id, cc._id)}
-                    >
-                      <FontAwesomeIcon icon={faFlag} /> Flag
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            ))}
-            <Modal
-              isOpen={this.state.modal}
-              toggle={this.toggle}
-              className={this.props.className}
-              backdrop={this.state.backdrop}
-            >
-              <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
-              <ModalBody>
-                <FormGroup>
-                  <Label for="nameM">Name</Label>
-                  <Input
-                    onChange={this.handleChange}
-                    type="text"
-                    name="name"
-                    id="nameM"
-                  />
-                  <Label for="emailM">Email</Label>
-                  <Input
-                    onChange={this.handleChange}
-                    type="email"
-                    name="email"
-                    id="emailM"
-                  />
-                  <Label for="bodyM">Reply</Label>
-                  <Input
-                    onChange={this.handleChange}
-                    type="textarea"
-                    name="body"
-                    id="bodyM"
-                  />
-                </FormGroup>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="success"
-                  onClick={() => this.reply(this.state.ids)}
-                >
-                  Submit
-                </Button>{" "}
-                <Button color="danger" onClick={this.toggle}>
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </div>
-        ))}
+        <Posts
+          state={this.state}
+          toggle={this.toggle}
+          like={this.like}
+          disabled={this.disabled}
+          handleChange={this.handleChange}
+          post={this.post}
+          reply={this.reply}
+          flag={this.flag}
+        />
       </Container>
     );
   }
@@ -360,66 +222,6 @@ export class DiscussionBoard extends Component {
 
 const containerStyle = {
   marginBottom: "50px"
-};
-
-const postStyle = {
-  padding: "20px",
-  paddingRight: "10px",
-  marginTop: "20px",
-  border: "2px #ededed solid",
-  borderRadius: "5px"
-};
-
-const pNameStyle = {
-  display: "inline",
-  fontSize: "1.5rem",
-  fontWeight: "bold"
-};
-
-const pLikesStyle = {
-  display: "inline",
-  float: "right",
-  marginTop: "3px"
-};
-
-const pBody = {
-  fontSize: "1.5rem"
-};
-
-const iconHeart = {
-  padding: "0px",
-  margin: "0px",
-  color: "red",
-  display: "inline",
-  float: "right",
-  fontSize: "1.5rem",
-  marginRight: "10px"
-};
-
-const replyBtn = {
-  border: "none"
-};
-
-const commentStyle = {
-  padding: "10px",
-  marginTop: "10px",
-  marginLeft: "10px",
-  borderLeft: "2px #ededed solid",
-  borderRight: "2px #ededed solid"
-};
-
-const ccDivStyle = {
-  padding: "10px",
-  marginTop: "10px",
-  marginLeft: "20px",
-  borderLeft: "2px #ededed solid",
-  borderRight: "2px #ededed solid"
-};
-
-const pDateStyle = {
-  display: "inline",
-  color: "grey",
-  fontStyle: "italic"
 };
 
 export default DiscussionBoard;
