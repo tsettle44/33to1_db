@@ -7,7 +7,9 @@ import {
   ModalFooter,
   Input,
   Label,
-  FormGroup
+  FormGroup,
+  Row,
+  Col
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -25,22 +27,28 @@ export class Posts extends Component {
       <div>
         {posts.map((post, i) => (
           <div style={postStyle} key={i}>
-            <p style={pNameStyle}>{post.name} </p>
-            <p style={pDateStyle}>
-              at {moment(post.createdAt).format("MM/DD/YY, h:mm a")}
-            </p>
-            <p style={pLikesStyle}>{post.likes}</p>
-            <Button
-              id={i}
-              color="link"
-              style={iconHeart}
-              onClick={() => {
-                this.props.like(post._id);
-                this.props.disabled(i);
-              }}
-            >
-              <FontAwesomeIcon icon={faHeart} />
-            </Button>
+            <Row>
+              <Col xs="8" sm="10">
+                <p style={pNameStyle}>{post.name} </p>
+                <p style={pDateStyle}>
+                  at {moment(post.createdAt).format("MM/DD/YY, h:mm a")}
+                </p>
+              </Col>
+              <Col xs="4" sm="2">
+                <p style={pLikesStyle}>{post.likes}</p>
+                <Button
+                  id={i}
+                  color="link"
+                  style={iconHeart}
+                  onClick={() => {
+                    this.props.like(post._id);
+                    this.props.disabled(i);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faHeart} />
+                </Button>
+              </Col>
+            </Row>
             <p style={pBody}>{post.body}</p>
             <Button
               color="link"
@@ -54,23 +62,29 @@ export class Posts extends Component {
             </Button>
             {post.comments.map((comment, c) => (
               <div style={commentStyle} key={c}>
-                <p style={pNameStyle}>{comment.name} </p>
-                <p style={pDateStyle}>
-                  {" "}
-                  at {moment(comment.createdAt).format("MM/DD/YY, h:mm a")}
-                </p>
-                <p style={pLikesStyle}>{comment.likes}</p>
-                <Button
-                  id={c.toString() + "-c"}
-                  color="link"
-                  style={iconHeart}
-                  onClick={() => {
-                    this.props.like(post._id, comment._id);
-                    this.props.disabled(c + "-c");
-                  }}
-                >
-                  <FontAwesomeIcon icon={faHeart} />
-                </Button>
+                <Row>
+                  <Col xs="8" sm="10">
+                    <p style={pNameStyle}>{comment.name} </p>
+                    <p style={pDateStyle}>
+                      {" "}
+                      at {moment(comment.createdAt).format("MM/DD/YY, h:mm a")}
+                    </p>
+                  </Col>
+                  <Col xs="4" sm="2">
+                    <p style={pLikesStyle}>{comment.likes}</p>
+                    <Button
+                      id={c.toString() + "-c"}
+                      color="link"
+                      style={iconHeart}
+                      onClick={() => {
+                        this.props.like(post._id, comment._id);
+                        this.props.disabled(c + "-c");
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faHeart} />
+                    </Button>
+                  </Col>
+                </Row>
                 <p style={pBody}>{comment.body}</p>
                 <Button
                   color="link"
@@ -87,23 +101,29 @@ export class Posts extends Component {
                 </Button>
                 {comment.comments.map((cc, cID) => (
                   <div style={ccDivStyle} key={cID}>
-                    <p style={pNameStyle}>{cc.name} </p>
-                    <p style={pDateStyle}>
-                      {" "}
-                      at {moment(cc.createdAt).format("MM/DD/YY, h:mm a")}
-                    </p>
-                    <p style={pLikesStyle}>{cc.likes}</p>
-                    <Button
-                      id={cID.toString() + "-cc"}
-                      color="link"
-                      style={iconHeart}
-                      onClick={() => {
-                        this.props.like(post._id, comment._id, cc._id);
-                        this.props.disabled(cID + "-cc");
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faHeart} />
-                    </Button>
+                    <Row>
+                      <Col xs="8" sm="4">
+                        <p style={pNameStyle}>{cc.name} </p>
+                        <p style={pDateStyle}>
+                          {" "}
+                          at {moment(cc.createdAt).format("MM/DD/YY, h:mm a")}
+                        </p>
+                      </Col>
+                      <Col xs="4" sm="2">
+                        <p style={pLikesStyle}>{cc.likes}</p>
+                        <Button
+                          id={cID.toString() + "-cc"}
+                          color="link"
+                          style={iconHeart}
+                          onClick={() => {
+                            this.props.like(post._id, comment._id, cc._id);
+                            this.props.disabled(cID + "-cc");
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faHeart} />
+                        </Button>
+                      </Col>
+                    </Row>
                     <p style={pBody}>{cc.body}</p>
                     <Button
                       color="link"
