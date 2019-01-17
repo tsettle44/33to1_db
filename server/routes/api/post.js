@@ -42,8 +42,7 @@ router.post("/", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(post);
-        res.status(201).send();
+        res.status(201).send(post);
       }
     });
   } else {
