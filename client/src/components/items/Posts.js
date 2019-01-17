@@ -9,7 +9,8 @@ import {
   Label,
   FormGroup,
   Row,
-  Col
+  Col,
+  Jumbotron
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -25,6 +26,45 @@ export class Posts extends Component {
 
     return (
       <div>
+        <Jumbotron
+          style={{
+            marginTop: "15px",
+            paddingTop: "10px",
+            paddingBottom: "10px"
+          }}
+        >
+          <FormGroup>
+            <h3>Post on the Board</h3>
+            <Label for="name">Name</Label>
+            <Input
+              onChange={this.props.handleChange}
+              type="text"
+              name="name"
+              id="name"
+            />
+            <Label for="email">Email</Label>
+            <Input
+              onChange={this.props.handleChange}
+              type="email"
+              name="email"
+              id="email"
+            />
+            <Label for="body">Post</Label>
+            <Input
+              onChange={this.props.handleChange}
+              type="textarea"
+              name="body"
+              id="body"
+            />
+            <Button
+              style={{ marginTop: "15px" }}
+              onClick={this.props.post}
+              color="success"
+            >
+              Submit
+            </Button>
+          </FormGroup>
+        </Jumbotron>
         {posts.map((post, i) => (
           <div style={postStyle} key={i}>
             <Row>
@@ -102,7 +142,7 @@ export class Posts extends Component {
                 {comment.comments.map((cc, cID) => (
                   <div style={ccDivStyle} key={cID}>
                     <Row>
-                      <Col xs="8" sm="4">
+                      <Col xs="8" sm="10">
                         <p style={pNameStyle}>{cc.name} </p>
                         <p style={pDateStyle}>
                           {" "}

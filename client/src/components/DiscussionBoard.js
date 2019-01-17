@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Button,
-  Input,
-  Label,
-  FormGroup,
-  Jumbotron
-} from "reactstrap";
+import { Container } from "reactstrap";
 import axios from "axios";
 import Posts from "./items/Posts";
 
@@ -43,8 +36,8 @@ export class DiscussionBoard extends Component {
         email: this.state.email,
         body: this.state.body
       })
-      .then(function(response) {
-        console.log(response);
+      .then(res => {
+        console.log(res);
       })
       .catch(function(error) {
         console.log(error);
@@ -166,52 +159,13 @@ export class DiscussionBoard extends Component {
           Please, no character attacks. Trash-talking is great, but slandering
           people isn’t. Let’s keep it clean. Or your post will be deleted.
         </p>
-        <Jumbotron
-          style={{
-            marginTop: "15px",
-            paddingTop: "10px",
-            paddingBottom: "10px"
-          }}
-        >
-          <FormGroup>
-            <h3>Post on the Board</h3>
-            <Label for="name">Name</Label>
-            <Input
-              onChange={this.handleChange}
-              type="text"
-              name="name"
-              id="name"
-            />
-            <Label for="email">Email</Label>
-            <Input
-              onChange={this.handleChange}
-              type="email"
-              name="email"
-              id="email"
-            />
-            <Label for="body">Post</Label>
-            <Input
-              onChange={this.handleChange}
-              type="textarea"
-              name="body"
-              id="body"
-            />
-            <Button
-              style={{ marginTop: "15px" }}
-              onClick={this.post}
-              color="success"
-            >
-              Submit
-            </Button>
-          </FormGroup>
-        </Jumbotron>
         <Posts
           state={this.state}
           toggle={this.toggle}
           like={this.like}
+          post={this.post}
           disabled={this.disabled}
           handleChange={this.handleChange}
-          post={this.post}
           reply={this.reply}
           flag={this.flag}
         />
