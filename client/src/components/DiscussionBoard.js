@@ -62,37 +62,49 @@ export class DiscussionBoard extends Component {
   };
 
   reply = id => {
-    if (id.p && id.c) {
-      axios
-        .post(
-          "http://localhost:5000/api/posts/" + id.p + "/" + id.c + "/comment",
-          {
+    if (this.state.name == "") {
+      this.setState({ validatedName: true });
+    } else if (this.state.email == "") {
+      this.setState({ validatedEmail: true, validateName: false });
+    } else if (this.state.body == "") {
+      this.setState({
+        validatedBody: true,
+        validateEmail: false,
+        validateName: false
+      });
+    } else {
+      if (id.p && id.c) {
+        axios
+          .post(
+            "http://localhost:5000/api/posts/" + id.p + "/" + id.c + "/comment",
+            {
+              name: this.state.name,
+              email: this.state.email,
+              body: this.state.body
+            }
+          )
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        window.location.reload();
+      } else {
+        axios
+          .post("http://localhost:5000/api/posts/" + id.p + "/comment", {
             name: this.state.name,
             email: this.state.email,
             body: this.state.body
-          }
-        )
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      window.location.reload();
-    } else {
-      axios
-        .post("http://localhost:5000/api/posts/" + id.p + "/comment", {
-          name: this.state.name,
-          email: this.state.email,
-          body: this.state.body
-        })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      window.location.reload();
+          })
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        window.location.reload();
+      }
     }
   };
 

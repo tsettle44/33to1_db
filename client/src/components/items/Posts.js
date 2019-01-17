@@ -52,7 +52,7 @@ export class Posts extends Component {
               name="name"
               id="name"
             />
-            <FormFeedback>Do not leave name blank!</FormFeedback>
+            <FormFeedback>Do not leave your name blank!</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="email">Email</Label>
@@ -63,7 +63,7 @@ export class Posts extends Component {
               name="email"
               id="email"
             />
-            <FormFeedback>Do not leave email blank!</FormFeedback>
+            <FormFeedback>Do not leave your email blank!</FormFeedback>
           </FormGroup>
           <FormGroup>
             <Label for="body">Post</Label>
@@ -214,25 +214,35 @@ export class Posts extends Component {
                 <FormGroup>
                   <Label for="nameM">Name</Label>
                   <Input
+                    invalid={validatedName}
                     onChange={this.props.handleChange}
                     type="text"
                     name="name"
                     id="nameM"
                   />
+                  <FormFeedback>Do not leave your name blank!</FormFeedback>
+                </FormGroup>
+                <FormGroup>
                   <Label for="emailM">Email</Label>
                   <Input
+                    invalid={validatedEmail}
                     onChange={this.props.handleChange}
                     type="email"
                     name="email"
                     id="emailM"
                   />
+                  <FormFeedback>Do not leave your email blank!</FormFeedback>
+                </FormGroup>
+                <FormGroup>
                   <Label for="bodyM">Reply</Label>
                   <Input
+                    invalid={validatedBody}
                     onChange={this.props.handleChange}
                     type="textarea"
                     name="body"
                     id="bodyM"
                   />
+                  <FormFeedback>Do not leave the post body blank!</FormFeedback>
                 </FormGroup>
               </ModalBody>
               <ModalFooter>
