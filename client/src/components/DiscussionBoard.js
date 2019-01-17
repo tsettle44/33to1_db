@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
 import Posts from "./items/Posts";
+import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 
 export class DiscussionBoard extends Component {
   state = {
@@ -11,7 +12,10 @@ export class DiscussionBoard extends Component {
     ids: [],
     name: "",
     body: "",
-    email: ""
+    email: "",
+    validateName: false,
+    validateEmail: false,
+    validateBody: false
   };
 
   componentDidMount() {
@@ -30,19 +34,31 @@ export class DiscussionBoard extends Component {
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
   post = () => {
-    axios
-      .post("http://localhost:5000/api/posts", {
-        name: this.state.name,
-        email: this.state.email,
-        body: this.state.body
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(function(error) {
-        console.log(error);
+    if (this.state.name == "") {
+      this.setState({ validatedName: true });
+    } else if (this.state.email == "") {
+      this.setState({ validatedEmail: true, validateName: false });
+    } else if (this.state.body == "") {
+      this.setState({
+        validatedBody: true,
+        validateEmail: false,
+        validateName: false
       });
-    window.location.reload();
+    } else {
+      axios
+        .post("http://localhost:5000/api/posts", {
+          name: this.state.name,
+          email: this.state.email,
+          body: this.state.body
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      window.location.reload();
+    }
   };
 
   reply = id => {

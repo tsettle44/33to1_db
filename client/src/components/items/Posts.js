@@ -10,7 +10,8 @@ import {
   FormGroup,
   Row,
   Col,
-  Jumbotron
+  Jumbotron,
+  FormFeedback
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,7 +23,15 @@ import moment from "moment";
 
 export class Posts extends Component {
   render() {
-    const { posts, modal, backdrop, ids } = this.props.state;
+    const {
+      posts,
+      modal,
+      backdrop,
+      ids,
+      validatedName,
+      validatedEmail,
+      validatedBody
+    } = this.props.state;
 
     return (
       <div>
@@ -37,25 +46,35 @@ export class Posts extends Component {
             <h3>Post on the Board</h3>
             <Label for="name">Name</Label>
             <Input
+              invalid={validatedName}
               onChange={this.props.handleChange}
               type="text"
               name="name"
               id="name"
             />
+            <FormFeedback>Do not leave name blank!</FormFeedback>
+          </FormGroup>
+          <FormGroup>
             <Label for="email">Email</Label>
             <Input
+              invalid={validatedEmail}
               onChange={this.props.handleChange}
               type="email"
               name="email"
               id="email"
             />
+            <FormFeedback>Do not leave email blank!</FormFeedback>
+          </FormGroup>
+          <FormGroup>
             <Label for="body">Post</Label>
             <Input
+              invalid={validatedBody}
               onChange={this.props.handleChange}
               type="textarea"
               name="body"
               id="body"
             />
+            <FormFeedback>Do not leave the post body blank!</FormFeedback>
             <Button
               style={{ marginTop: "15px" }}
               onClick={this.props.post}
