@@ -3,7 +3,6 @@ import { DiscussionBoard } from "./components/DiscussionBoard";
 import { DiscussionBoard_a } from "./components/DB_Admin";
 import { DiscussionBoardD } from "./components/DiscussionBoardDark";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Container } from "reactstrap";
 import "./App.css";
 
 class App extends Component {
@@ -28,22 +27,20 @@ class App extends Component {
     return (
       <Router>
         <div style={this.state.dark ? dark : light} className="App">
-          <Container>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <DiscussionBoard {...props} toggle={this.toggle} />
-              )}
-            />
-            <Route
-              path="/dark"
-              render={props => (
-                <DiscussionBoardD {...props} toggle={this.toggle} />
-              )}
-            />
-            <Route path="/admin" component={DiscussionBoard_a} />
-          </Container>
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <DiscussionBoard {...props} toggle={this.toggle} />
+            )}
+          />
+          <Route
+            path="/dark"
+            render={props => (
+              <DiscussionBoardD {...props} toggle={this.toggle} />
+            )}
+          />
+          <Route path="/admin" component={DiscussionBoard_a} />
         </div>
       </Router>
     );
