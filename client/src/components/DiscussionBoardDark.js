@@ -19,9 +19,7 @@ export class DiscussionBoardD extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/api/posts")
-      .then(res => this.setState({ posts: res.data }));
+    axios.get("api/posts").then(res => this.setState({ posts: res.data }));
   }
 
   toggle = (p, c) => {

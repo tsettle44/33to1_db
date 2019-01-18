@@ -16,7 +16,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    if (window.location.href === "http://localhost:3000/dark") {
+    if (
+      window.location.href ===
+      "https://murmuring-bayou-45837.herokuapp.com//dark"
+    ) {
       this.setState({ dark: true });
     }
   }
