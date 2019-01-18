@@ -4,19 +4,20 @@
   "description": "API for 33to1",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tsettle44/Forum_Fullstack.git"
+    "url": "git+https://github.com/tsettle44/33to1_db.git"
   },
   "author": "Tom Settle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tsettle44/Forum_Fullstack/issues"
+    "url": "https://github.com/tsettle44/33to1_db/issues"
   },
-  "homepage": "https://github.com/tsettle44/Forum_Fullstack#readme",
+  "homepage": "https://github.com/tsettle44/33to1_db#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
