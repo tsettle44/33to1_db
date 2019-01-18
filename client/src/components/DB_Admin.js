@@ -21,9 +21,7 @@ export class DiscussionBoard_a extends Component {
     const password = prompt("Please enter admin password to access page.");
 
     if (password === "admin") {
-      axios
-        .get("http://localhost:5000/api/posts")
-        .then(res => this.setState({ posts: res.data }));
+      axios.get("/api/posts").then(res => this.setState({ posts: res.data }));
     } else {
       window.location.replace("/");
     }
@@ -51,7 +49,7 @@ export class DiscussionBoard_a extends Component {
       });
     } else {
       axios
-        .post("http://localhost:5000/api/posts", {
+        .post("/api/posts", {
           name: this.state.name,
           email: this.state.email,
           body: this.state.body
@@ -80,14 +78,11 @@ export class DiscussionBoard_a extends Component {
     } else {
       if (id.p && id.c) {
         axios
-          .post(
-            "http://localhost:5000/api/posts/" + id.p + "/" + id.c + "/comment",
-            {
-              name: this.state.name,
-              email: this.state.email,
-              body: this.state.body
-            }
-          )
+          .post("/api/posts/" + id.p + "/" + id.c + "/comment", {
+            name: this.state.name,
+            email: this.state.email,
+            body: this.state.body
+          })
           .then(function(response) {
             console.log(response);
           })
@@ -97,7 +92,7 @@ export class DiscussionBoard_a extends Component {
         window.location.reload();
       } else {
         axios
-          .post("http://localhost:5000/api/posts/" + id.p + "/comment", {
+          .post("/api/posts/" + id.p + "/comment", {
             name: this.state.name,
             email: this.state.email,
             body: this.state.body
@@ -116,9 +111,7 @@ export class DiscussionBoard_a extends Component {
   like = (p, c, cc) => {
     if (p && c && cc) {
       axios
-        .post(
-          "http://localhost:5000/api/posts/" + p + "/" + c + "/" + cc + "/like"
-        )
+        .post("/api/posts/" + p + "/" + c + "/" + cc + "/like")
         .then(function(response) {
           console.log(response);
         })
@@ -134,7 +127,7 @@ export class DiscussionBoard_a extends Component {
       this.setState({ posts: [...this.state.posts] });
     } else if (p && c) {
       axios
-        .post("http://localhost:5000/api/posts/" + p + "/" + c + "/like")
+        .post("/api/posts/" + p + "/" + c + "/like")
         .then(function(response) {
           console.log(response);
         })
@@ -148,7 +141,7 @@ export class DiscussionBoard_a extends Component {
       this.setState({ posts: [...this.state.posts] });
     } else {
       axios
-        .post("http://localhost:5000/api/posts/" + p + "/like")
+        .post("/api/posts/" + p + "/like")
         .then(function(response) {
           console.log(response);
         })
