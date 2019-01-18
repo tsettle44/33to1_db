@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Posts from "./items/Posts";
+import PostsD from "./items/PostsD";
 
-export class DiscussionBoard extends Component {
+export class DiscussionBoardD extends Component {
   state = {
     posts: [],
     modal: false,
@@ -170,29 +170,31 @@ export class DiscussionBoard extends Component {
   render() {
     return (
       <Container style={containerStyle}>
-        <Link to="/dark">
+        <Link to="/">
           <Button
             style={btnStyle}
             onClick={this.props.toggle}
             outline
             color="primary"
           >
-            Dark Theme
+            Light Theme
           </Button>
         </Link>
-        <p className="display-4">33to1 Discussion Board</p>
-        <p className="lead">
-          We’ve noticed everyone has taken a liking to talking about the race.
-          So we’re giving you a place to do that, and just that. Feel free to
-          use this area to discuss anything and everything about the Little 500
-          — Qualifications, Spring Series, the race itself.
-        </p>
-        <hr className="my-2" />
-        <p>
-          Please, no character attacks. Trash-talking is great, but slandering
-          people isn’t. Let’s keep it clean. Or your post will be deleted.
-        </p>
-        <Posts
+        <div style={white}>
+          <p className="display-4">33to1 Discussion Board</p>
+          <p className="lead">
+            We’ve noticed everyone has taken a liking to talking about the race.
+            So we’re giving you a place to do that, and just that. Feel free to
+            use this area to discuss anything and everything about the Little
+            500 — Qualifications, Spring Series, the race itself.
+          </p>
+          <hr className="my-2" />
+          <p>
+            Please, no character attacks. Trash-talking is great, but slandering
+            people isn’t. Let’s keep it clean. Or your post will be deleted.
+          </p>
+        </div>
+        <PostsD
           state={this.state}
           toggle={this.toggle}
           like={this.like}
@@ -212,8 +214,12 @@ const btnStyle = {
   float: "right"
 };
 
-const containerStyle = {
-  marginBottom: "50px"
+const white = {
+  color: "#d7dadc"
 };
 
-export default DiscussionBoard;
+const containerStyle = {
+  paddingBottom: "50px"
+};
+
+export default DiscussionBoardD;
