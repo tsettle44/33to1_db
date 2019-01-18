@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
-import Posts from "./items/Posts";
+import PostsA from "./items/Posts_admin";
 
-export class DiscussionBoard extends Component {
+export class DiscussionBoard_a extends Component {
   state = {
     posts: [],
     modal: false,
@@ -18,9 +18,15 @@ export class DiscussionBoard extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/api/posts")
-      .then(res => this.setState({ posts: res.data }));
+    const password = prompt("Please enter admin password to access page.");
+
+    if (password === "admin") {
+      axios
+        .get("http://localhost:5000/api/posts")
+        .then(res => this.setState({ posts: res.data }));
+    } else {
+      window.location.replace("/");
+    }
   }
 
   toggle = (p, c) => {
@@ -171,22 +177,16 @@ export class DiscussionBoard extends Component {
     console.log(p, c, cc, "has been flagged");
   };
 
+  delete = (p, c, cc) => {
+    console.log(p, c, cc, "deleted");
+  };
+
   render() {
     return (
       <Container style={containerStyle}>
-        <h1 className="display-3">33to1 Discussion Board</h1>
-        <p className="lead">
-          We’ve noticed everyone has taken a liking to talking about the race.
-          So we’re giving you a place to do that, and just that. Feel free to
-          use this area to discuss anything and everything about the Little 500
-          — Qualifications, Spring Series, the race itself.
-        </p>
-        <hr className="my-2" />
-        <p>
-          Please, no character attacks. Trash-talking is great, but slandering
-          people isn’t. Let’s keep it clean. Or your post will be deleted.
-        </p>
-        <Posts
+        <h1 className="display-3">Admin View</h1>
+        <PostsA
+          delete={this.delete}
           state={this.state}
           toggle={this.toggle}
           like={this.like}
@@ -205,4 +205,4 @@ const containerStyle = {
   marginBottom: "50px"
 };
 
-export default DiscussionBoard;
+export default DiscussionBoard_a;
