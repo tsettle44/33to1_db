@@ -46,7 +46,7 @@ export class DiscussionBoard extends Component {
       });
     } else {
       axios
-        .post("http://localhost:5000/api/posts", {
+        .post("/api/posts", {
           name: this.state.name,
           email: this.state.email,
           body: this.state.body
