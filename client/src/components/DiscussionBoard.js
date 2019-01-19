@@ -19,7 +19,9 @@ export class DiscussionBoard extends Component {
   };
 
   componentDidMount() {
-    axios.get("/api/posts").then(res => this.setState({ posts: res.data }));
+    axios.get("/api/posts").then(res => {
+      this.setState({ posts: res.data });
+    });
   }
 
   toggle = (p, c) => {
@@ -44,7 +46,7 @@ export class DiscussionBoard extends Component {
       });
     } else {
       axios
-        .post("/api/posts", {
+        .post("http://localhost:5000/api/posts", {
           name: this.state.name,
           email: this.state.email,
           body: this.state.body

@@ -108,7 +108,14 @@ export class Posts extends Component {
                 </Button>
               </Col>
             </Row>
-            <p style={pBody}>{post.body}</p>
+            <p
+              style={pBody}
+              dangerouslySetInnerHTML={{
+                __html: post.body.replace(/\r?\n/g, "<br />", {
+                  sanitize: true
+                })
+              }}
+            />
             <Button
               color="link"
               style={replyBtn}
@@ -144,7 +151,14 @@ export class Posts extends Component {
                     </Button>
                   </Col>
                 </Row>
-                <p style={pBody}>{comment.body}</p>
+                <p
+                  style={pBody}
+                  dangerouslySetInnerHTML={{
+                    __html: comment.body.replace(/\r?\n/g, "<br />", {
+                      sanitize: true
+                    })
+                  }}
+                />
                 <Button
                   color="link"
                   style={replyBtn}
@@ -183,7 +197,14 @@ export class Posts extends Component {
                         </Button>
                       </Col>
                     </Row>
-                    <p style={pBody}>{cc.body}</p>
+                    <p
+                      style={pBody}
+                      dangerouslySetInnerHTML={{
+                        __html: cc.body.replace(/\r?\n/g, "<br />", {
+                          sanitize: true
+                        })
+                      }}
+                    />
                     <Button
                       color="link"
                       style={replyBtn}
