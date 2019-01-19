@@ -271,7 +271,7 @@ const postStyle = {
 
 const pNameStyle = {
   display: "inline",
-  fontSize: "1.5rem",
+  fontSize: "1.25rem",
   fontWeight: "bold"
 };
 
@@ -282,7 +282,7 @@ const pLikesStyle = {
 };
 
 const pBody = {
-  fontSize: "1.5rem"
+  fontSize: "1.1rem"
 };
 
 const iconHeart = {

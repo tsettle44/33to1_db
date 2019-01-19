@@ -210,9 +210,15 @@ export class PostsD extends Component {
               toggle={this.props.toggle}
               className={this.props.className}
               backdrop={backdrop}
+              style={{ backgroundColor: "#404142" }}
             >
-              <ModalHeader toggle={this.props.toggle}>Reply</ModalHeader>
-              <ModalBody>
+              <ModalHeader
+                style={{ backgroundColor: "#404142", color: "#fff" }}
+                toggle={this.props.toggle}
+              >
+                Reply
+              </ModalHeader>
+              <ModalBody style={{ backgroundColor: "#404142", color: "#fff" }}>
                 <FormGroup>
                   <Label for="nameM">Name</Label>
                   <Input
@@ -247,7 +253,9 @@ export class PostsD extends Component {
                   <FormFeedback>Do not leave the post body blank!</FormFeedback>
                 </FormGroup>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter
+                style={{ backgroundColor: "#404142", color: "#fff" }}
+              >
                 <Button color="success" onClick={() => this.props.reply(ids)}>
                   Submit
                 </Button>{" "}
@@ -267,7 +275,7 @@ const postStyle = {
   padding: "20px",
   paddingRight: "10px",
   marginTop: "20px",
-  border: "2px #ededed solid",
+  border: "2px #404142 solid",
   borderRadius: "5px",
   backgroundColor: "#1a1a1b",
   color: "#d7dadc"
@@ -275,7 +283,7 @@ const postStyle = {
 
 const pNameStyle = {
   display: "inline",
-  fontSize: "1.5rem",
+  fontSize: "1.25rem",
   fontWeight: "bold"
 };
 
@@ -286,7 +294,7 @@ const pLikesStyle = {
 };
 
 const pBody = {
-  fontSize: "1.5rem"
+  fontSize: "1.1rem"
 };
 
 const iconHeart = {
@@ -307,16 +315,16 @@ const commentStyle = {
   padding: "10px",
   marginTop: "10px",
   marginLeft: "10px",
-  borderLeft: "2px #ededed solid",
-  borderRight: "2px #ededed solid"
+  borderLeft: "2px #404142 solid",
+  borderRight: "2px #404142 solid"
 };
 
 const ccDivStyle = {
   padding: "10px",
   marginTop: "10px",
   marginLeft: "20px",
-  borderLeft: "2px #ededed solid",
-  borderRight: "2px #ededed solid"
+  borderLeft: "2px #404142 solid",
+  borderRight: "2px #404142 solid"
 };
 
 const pDateStyle = {
